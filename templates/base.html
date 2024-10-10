@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block titulo %} Conteúdo do título aqui {% endblock %}</title>
+        {% load static %} <!-- Carrega arquivos estáticos -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Inclui o CSS -->
+        {% block head %}
+        <!-- Itens de cabeçalho -->
+        {% endblock %}
+   </head>
+   <body style="background: url('{% static 'img/ferti.jpg' %}') no-repeat center center fixed; background-size: cover;">
+        {% block conteudo %}
+        <!-- Conteúdo do site -->
+        {% endblock %}
+   </body>
+</html>

@@ -1,0 +1,11 @@
+/* Configurações do body com imagem de fundo */
+body {
+    background: url('/static/img/ferti.jpg') no-repeat center center fixed;
+    background-size: cover; /* Cobre toda a tela */
+    min-height: 100vh; /* Altura mínima para garantir que o fundo cubra toda a tela */
+    display: flex; /* Centraliza o conteúdo */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Alinha horizontalmente */
+    position: relative;
+    padding: 20px; /* Adiciona espaçamento para evitar cortes em telas menores */
+}

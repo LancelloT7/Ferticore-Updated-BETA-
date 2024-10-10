@@ -1,0 +1,86 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Configurações do body com imagem de fundo */
+body {
+    background: url('/static/img/ferti.jpg') no-repeat center center fixed;
+    background-size: cover; /* Cobre toda a tela */
+    min-height: 100vh; /* Altura mínima para garantir que o fundo cubra toda a tela */
+    display: flex; /* Centraliza o conteúdo */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Alinha horizontalmente */
+    position: relative;
+    padding: 20px; /* Adiciona espaçamento para evitar cortes em telas menores */
+}
+
+/* Estilo do contêiner principal */
+.container {
+    background: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
+    padding: 20px 40px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    max-width: 500px; /* Largura máxima do contêiner */
+    width: 100%; /* Largura total do contêiner */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil ao redor */
+    z-index: 2; /* Garante que o conteúdo fique acima da imagem de fundo */
+    position: relative;
+}
+
+/* Título do formulário */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Cor do texto */
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Estilos dos inputs no formulário */
+input {
+    width: 100%; /* Ocupa toda a largura do espaço disponível */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Bordas cinza claro */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    margin-top: 10px; /* Espaçamento superior */
+}
+
+/* Espaçamento entre colunas */
+.row .col {
+    margin-bottom: 15px;
+}
+
+/* Estilo para ícones dentro do input (se aplicável) */
+.input-container img {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Estilos de responsividade para telas menores */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* Garantir que a imagem de fundo fique visível em todas as telas */
+@media (max-width: 576px) {
+    body {
+        background-size: contain; /* Faz a imagem de fundo se ajustar melhor em telas pequenas */
+    }
+}

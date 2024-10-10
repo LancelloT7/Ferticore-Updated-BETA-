@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Cadastro
+{% endblock %}
+
+{% block head %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Carregando o arquivo CSS estático -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+
+  <!-- Verifique se o Bootstrap está carregado, se estiver usando as classes dele -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block conteudo %}
+ 
+<form method="POST" action="{% url 'cadastro' %}">{% csrf_token %}
+  <input type="text" placeholder = "Login..." name="login">
+  <input type="password" placeholder = "Senha..." name="senha">
+  <input type="submit">
+</form>    
+{% endblock %}
+
+

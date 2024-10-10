@@ -1,0 +1,14 @@
+<form method="POST">
+    {% csrf_token %}
+    <label for="nome_cliente">Nome do Cliente:</label>
+    <input type="text" id="nome_cliente" name="nome_cliente">
+
+    <label for="produto">Selecione os Produtos:</label>
+    <select id="produto" name="produto" multiple>
+        {% for produto in produtos %}
+            <option value="{{ produto.id }}">{{ produto.nome }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Cadastrar Pedido</button>
+</form>

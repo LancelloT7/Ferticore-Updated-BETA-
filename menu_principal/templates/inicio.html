@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Exemplo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* Estilos da Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        /* Estilos do conteúdo */
+        .content {
+            margin-left: 250px; /* Espaço para a sidebar */
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100px;
+            }
+
+            .sidebar a {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .content {
+                margin-left: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="#home">Produção</a>
+        <a href="#services">Dashboard</a>
+        <a href="{% url 'cadPedidos' %}">Cadastrar</a>
+        <a href="{% url 'cadProduto' %}">Cadastro de produtos</a>
+        <a href="{% url 'listar_pedidos' %}">Ver Pedidos</a>
+
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="content">
+        <h1>Bem-vindo à Página com Sidebar</h1>
+        <p>Este é o conteúdo principal da página. A sidebar contém links de navegação à esquerda.</p>
+    </div>
+
+</body>
+</html>
