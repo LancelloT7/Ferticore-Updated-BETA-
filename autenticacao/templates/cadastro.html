@@ -18,7 +18,13 @@ Cadastro
 {% endblock %}
 
 {% block conteudo %}
- 
+ {% if messages %}
+    {% for message in messages %}
+        <div class="{{message.tags}}" role="alert">
+              {{message}}
+        </div>
+    {% endfor %}
+ {% endif %}
 <form method="POST" action="{% url 'cadastro' %}">{% csrf_token %}
   <input type="text" placeholder = "Login..." name="login">
   <input type="password" placeholder = "Senha..." name="senha">

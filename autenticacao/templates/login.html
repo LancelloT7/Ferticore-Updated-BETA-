@@ -24,7 +24,16 @@ Login
 {% endblock %}
 
 {% block conteudo %}
+ 
+
   <div class="container form-container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
       <h2>Entrar na plataforma</h2>
       <div class="row g-3">
           <div class="col-12">

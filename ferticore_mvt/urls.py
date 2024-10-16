@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +24,5 @@ urlpatterns = [
     path('menu/', include('menu_principal.urls')),
     path('pedidos/', include('pedidos.urls')),
     path('produtos/', include('produtos.urls')),
+    path('', lambda request: render(request, 'login.html'), name='login'),
 ]
