@@ -1,0 +1,32 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="POST" action="{% url 'cadastrar_cliente' %}">
+    {% csrf_token %}
+    
+    <input type="text" placeholder="Nome" name="nome" required>
+    <hr>
+    <input type="text" placeholder="CNPJ" name="cnpj" required>
+    <hr>
+    <label for="tipo_cliente">Tipo de Cliente:</label>
+    <select name="tipo_cliente" id="tipo_cliente" required>
+        <option value="">Selecione um tipo</option>
+        <option value="Revenda">Revenda</option>
+        <option value="Produtor">Produtor</option>
+        <option value="Usina">Usina</option>
+        <option value="Cooperativa">Cooperativa</option>
+    </select>
+    
+    <hr>
+    <div>
+        <input type="submit" value="Cadastrar" class="btn btn-success">
+    </div>
+    
+    <hr>
+
+</form>

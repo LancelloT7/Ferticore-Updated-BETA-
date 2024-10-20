@@ -25,4 +25,6 @@ urlpatterns = [
     path('pedidos/', include('pedidos.urls')),
     path('produtos/', include('produtos.urls')),
     path('', lambda request: render(request, 'login.html'), name='login'),
+    path('funcionario/', include('funcionarios.urls')),
+    path('cliente/', include('cliente.urls')),
 ]

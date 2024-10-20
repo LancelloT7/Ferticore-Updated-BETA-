@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'menu_principal',
     'pedidos',
     'produtos',
+    'funcionarios',
+    'cliente',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +139,6 @@ from django.contrib.messages import constants
 
 MESSAGE_TAGS = {
 
-    constants.ERROR : 'alert-error',
+    constants.ERROR : 'alert-danger',
     constants.SUCCESS : 'alert-success',
 }

@@ -64,6 +64,9 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+        {% if user.is_authenticated %}
+            <h2>Olá {{ user.username }}</h2>
+        {% endif %}
         <h2>Menu</h2>
         <a href="#home">Produção</a>
         <a href="#services">Dashboard</a>
