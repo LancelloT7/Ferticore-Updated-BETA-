@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 import json  # Certifique-se de importar json corretamente
 from django.contrib.auth.models import User
 from menu_principal.views import inicio
@@ -25,20 +25,20 @@ def auth(request):
     if request.method == "GET":
         return render(request, 'login.html')
     elif request.method == "POST":
-        login = request.POST.get('login')
+        
+        login_username = request.POST.get('login')
         senha = request.POST.get('senha')
         
         # Verifica se o usuário está autenticado
-        user = authenticate(username=login, password=senha)
+        usuario = authenticate(request, username=login_username, password=senha)
         
-        if user is not None:
-            request.session['logado'] = True
-            request.session['usuario_id'] = user.id
-            request.session['nome_usuario'] = user.username
-            return render(request, 'inicio.html')
+        if  not usuario:
+            messages.add_message(request, constants.ERROR, 'Usuário ou senha inválidos.')
+            return redirect('/autenticacao/auth')
+            
         else:
-            # Usuário não autenticado
-            messages.add_message(request, constants.ERROR, 'Usuário ou senha invalidos')
-            return redirect('/autenticacao/auth/')
+            login(request, usuario)  
+            return redirect('/menu/opcoes')  # Redireciona para a página inicial
+            
 
 

@@ -25,3 +25,5 @@ class Pedido(models.Model):
                 f"Data do Pedido: {self.data_pedido.strftime('%d/%m/%Y %H:%M')} - "
                 f"Status: {self.status} - "
                 f"Produtos: {produtos_nomes}")
+    
+    

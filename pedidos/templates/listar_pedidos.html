@@ -3,17 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Lista de Pedidos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn-finalizar {
+            background-color: #28a745; /* Verde */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
+    
     <h1>Lista de Pedidos</h1>
     <table>
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Nome do Cliente</th>
+                <th>Funcionário</th>
                 <th>Data do Pedido</th>
+                <th>Status</th>
                 <th>Produtos</th>
+                <th>Ações</th> <!-- Nova coluna para ações -->
             </tr>
         </thead>
         <tbody>
@@ -21,16 +61,26 @@
             <tr>
                 <td>{{ pedido.cod }}</td>
                 <td>{{ pedido.nome_cliente }}</td>
+                <td>{{ pedido.funcionario }}</td>
                 <td>{{ pedido.data_pedido }}</td>
+                <td>{{ pedido.status }}</td>  <!-- Aqui deve aparecer o status atualizado -->
                 <td>
                     {% for produto in pedido.produto.all %}
                         {{ produto.nome }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 </td>
+                <td>
+                    {% if pedido.status == 'Pendente' %}  <!-- Mostra o botão apenas se o status for 'Pendente' -->
+                        <form action="{% url 'finalizar_pedido' pedido.cod %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-finalizar">Finalizar</button>
+                        </form>
+                    {% endif %}
+                </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="4">Nenhum pedido encontrado.</td>
+                <td colspan="7">Nenhum pedido encontrado.</td>
             </tr>
             {% endfor %}
         </tbody>
