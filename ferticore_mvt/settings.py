@@ -136,9 +136,9 @@ STATIC_ROOT = os.path.join('static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from django.contrib.messages import constants
+from django.contrib import messages
 
 MESSAGE_TAGS = {
-
-    constants.ERROR : 'alert-danger',
-    constants.SUCCESS : 'alert-success',
+    constants.ERROR: 'alert-danger',
+    constants.SUCCESS: 'alert-success'
 }

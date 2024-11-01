@@ -13,11 +13,10 @@ from django.urls import reverse
 @login_required(login_url='/autenticacao/auth')
 def cadPedidos(request):      
     clientes = Cliente.objects.all()
-    produtos = Produto.objects.all()  # Busque todos os produtos
+    produtos = Produto.objects.all()
     funcionarios = Funcionario.objects.all()
 
     if request.method == "GET":
-        # Enviar todos os contextos em um único dicionário
         return render(request, 'cad_pedidos.html', {
             'produtos': produtos,
             'clientes': clientes,
@@ -27,26 +26,21 @@ def cadPedidos(request):
     elif request.method == "POST":
         nome_cliente = request.POST.get('nome_cliente')
         produto_ids = request.POST.getlist('produto')  # Recebe uma lista de IDs de produtos
-        funcionario_id = request.POST.get('funcionario')  # Captura o ID do funcionário
+        funcionario_id = request.POST.get('funcionario')
         
-        # Criar o pedido e associar o cliente
         cliente = Cliente.objects.get(id=nome_cliente)
         funcionario = Funcionario.objects.get(id=funcionario_id)
 
-        # Criação do pedido
         pedido = Pedido(nome_cliente=cliente, funcionario=funcionario)
-        pedido.save()
+        pedido.save()  # Salva o pedido sem produtos para obter o ID
 
-        # Associe cada produto ao pedido
         for produto_id in produto_ids:
-            produto = Produto.objects.get(id=produto_id)  # Recupera o produto pelo ID
-            pedido.produto.add(produto)  # Adiciona o produto ao pedido
-        messages.add_message(request, constants.SUCCESS, 'Pedido cadastrado com sucesso')
+            produto = Produto.objects.get(id=produto_id)
+            pedido.produto.add(produto)
+        
         pedido.save()  # Salva o pedido com os produtos relacionados
-
-        # Exibir mensagem de sucesso
-        messages.add_message(request, constants.SUCCESS, 'Pedido cadastrado com sucesso')  
-        return redirect('/pedidos/cadastrar_pedidos')  # Redireciona para a página inicial (ajuste a URL conforme necessário)
+        messages.add_message(request, constants.SUCCESS, 'Pedido cadastrado com sucesso')
+        return redirect('/pedidos/cadastrar_pedidos')  # Redireciona conforme necessário
 
 @login_required(login_url='/autenticacao/auth')
 def listar_pedidos(request):

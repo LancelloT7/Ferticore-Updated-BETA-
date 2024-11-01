@@ -31,4 +31,10 @@ def cadProduto(request):
 
         return render(request, 'cadProduto.html')
     
+@login_required(login_url=('/autenticacao/auth'))    
+def listar_produtos(request):
+    produtos = Produto.objects.all()
+    return render(request, 'listar_produto.html', {'produtos':produtos })
+
+    
     

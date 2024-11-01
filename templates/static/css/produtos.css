@@ -1,0 +1,50 @@
+<style>
+    /* Estilos básicos para o layout dos produtos */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;  /* Espaçamento entre os cards */
+    }
+
+    .produto-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        flex: 1 1 calc(25% - 20px);  /* Quatro colunas */
+        min-width: 220px;  /* Largura mínima */
+        transition: transform 0.2s;
+    }
+
+    .produto-card:hover {
+        transform: scale(1.05);  /* Efeito ao passar o mouse */
+    }
+
+    .produto-nome {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0 0 10px;
+    }
+
+    .produto-descricao {
+        font-size: 14px;
+        color: #666;
+        margin: 0 0 10px;
+    }
+
+    .produto-preco {
+        font-size: 16px;
+        color: #333;
+        margin: 0;
+    }
+</style>

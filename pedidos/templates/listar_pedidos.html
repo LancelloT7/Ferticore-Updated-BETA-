@@ -1,4 +1,159 @@
+
 <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Exemplo</title>
+    <style>
+        /* Fundo reciclado e estilo base */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f4f1e0; /* Fundo de papel reciclado */
+            color: #4b4b4b;
+        }
+
+        /* Estilos da Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            background-color: #1B5E20;
+            color: #f4f1e0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            transition: width 0.3s ease, visibility 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar h2 {
+            margin: 10px 20px;
+            font-size: 22px;
+            color: #eaeaea;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 20px;
+            color: #f4f1e0;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #000; /* Fundo preto no hover */
+            border-left: 4px solid #4CAF50; /* Realce do link ativo em verde */
+            padding-left: 16px;
+        }
+
+        /* Botão de alternância fora da sidebar */
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 260px; /* Ajustado para ficar ao lado da sidebar */
+            font-size: 26px;
+            color: #3d3d3d;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1000; /* Garantir que o botão fique acima da sidebar */
+            transition: color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            color: #1e88e5;
+        }
+
+        /* Sidebar oculta */
+        .sidebar.hidden {
+            width: 0;
+            visibility: hidden;
+        }
+
+        /* Conteúdo principal */
+        .content {
+            margin-left: 260px; /* Espaço para a sidebar */
+            padding: 30px;
+            width: 100%;
+            transition: margin-left 0.3s ease;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .content.shifted {
+            margin-left: 0;
+        }
+
+        .content h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100px;
+            }
+
+            .sidebar.hidden {
+                width: 0;
+                visibility: hidden;
+            }
+
+            .toggle-btn {
+                left: 110px; /* Ajustado para telas menores */
+            }
+
+            .content {
+                margin-left: 100px;
+            }
+
+            .content.shifted {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        {% if user.is_authenticated %}
+            <h2>Olá, {{ user.username }}</h2>
+        {% endif %}
+        
+        <h2>Menu</h2>
+        <a href="#home">Produção</a>
+        <a href="#services">Dashboard</a>
+        <a href="{% url 'cadPedidos' %}">Fazer Pedidos</a>
+        <a href="{% url 'cadProduto' %}">Cadastro de produtos</a>
+        <a href="{% url 'listar_pedidos' %}">Ver Pedidos</a>
+        <a href="{% url 'listar_produtos' %}">Ver Produtos</a>
+        <a href="{% url 'cadastrar_cliente' %}">Cadastrar Clientes</a>
+        <a href="{% url 'cadastrar_funcionario' %}">Cadastrar Funcionário</a>
+        <a href="{% url 'sair' %}">Sair</a>
+    </div>
+
+    <!-- Botão de alternância fora da sidebar -->
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+    <!-- Conteúdo principal -->
+    <div class="content" id="content">
+        <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -6,38 +161,70 @@
     
     <title>Lista de Pedidos</title>
     <style>
+        /* Fundo de papel reciclado */
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
             padding: 0;
+            background-color: #f5f1e1; /* Cor de fundo de papel reciclado */
+            color: #333;
         }
+
+        h1 {
+            font-size: 24px;
+            color: #2E7D32; /* Verde escuro */
+            margin-bottom: 10px;
+        }
+
+        /* Estilos da tabela */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            background-color: #ffffff; /* Fundo branco para contraste */
         }
+
         th, td {
             border: 1px solid #dddddd;
             text-align: left;
-            padding: 8px;
+            padding: 10px;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #e0e0e0; /* Cabeçalho em cinza claro */
+            color: #333;
         }
+
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f9f9f9; /* Efeito de hover mais suave */
         }
+
+        /* Botão de finalizar pedido */
         .btn-finalizar {
-            background-color: #28a745; /* Verde */
+            background-color: #2E7D32; /* Verde escuro */
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 8px 12px;
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
             font-size: 14px;
             cursor: pointer;
             border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-finalizar:hover {
+            background-color: #1B5E20; /* Tom mais escuro no hover */
+        }
+
+        /* Estilos para a lista de produtos */
+        .produtos {
+            margin: 0; /* Remover margem */
+            padding: 0; /* Remover preenchimento */
+            list-style-type: none; /* Remover marcadores de lista */
+        }
+
+        .produtos li {
+            padding: 4px 0; /* Espaçamento entre os itens da lista */
         }
     </style>
 </head>
@@ -53,7 +240,7 @@
                 <th>Data do Pedido</th>
                 <th>Status</th>
                 <th>Produtos</th>
-                <th>Ações</th> <!-- Nova coluna para ações -->
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -63,14 +250,16 @@
                 <td>{{ pedido.nome_cliente }}</td>
                 <td>{{ pedido.funcionario }}</td>
                 <td>{{ pedido.data_pedido }}</td>
-                <td>{{ pedido.status }}</td>  <!-- Aqui deve aparecer o status atualizado -->
+                <td>{{ pedido.status }}</td>
                 <td>
-                    {% for produto in pedido.produto.all %}
-                        {{ produto.nome }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
+                    <ul class="produtos">
+                        {% for produto in pedido.produto.all %}
+                            <li>{{ produto.nome }}</li>
+                        {% endfor %}
+                    </ul>
                 </td>
                 <td>
-                    {% if pedido.status == 'Pendente' %}  <!-- Mostra o botão apenas se o status for 'Pendente' -->
+                    {% if pedido.status == 'Pendente' %}
                         <form action="{% url 'finalizar_pedido' pedido.cod %}" method="POST" style="display:inline;">
                             {% csrf_token %}
                             <button type="submit" class="btn-finalizar">Finalizar</button>
@@ -87,3 +276,28 @@
     </table>
 </body>
 </html>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var content = document.getElementById('content');
+            var toggleBtn = document.querySelector('.toggle-btn');
+
+            // Alternar a classe 'hidden' na sidebar e 'shifted' no conteúdo
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('shifted');
+
+            // Ajustar a posição do botão conforme a visibilidade da sidebar
+            if (sidebar.classList.contains('hidden')) {
+                toggleBtn.style.left = '10px'; // Colocar o botão à esquerda quando a sidebar estiver escondida
+            } else {
+                toggleBtn.style.left = '260px'; // Colocar o botão ao lado da sidebar quando estiver visível
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
