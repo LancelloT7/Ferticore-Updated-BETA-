@@ -152,8 +152,41 @@
 
     <!-- Conteúdo principal -->
     <div class="content" id="content">
-        <h1>Bem-vindo à Página com Sidebar</h1>
-        <p>Este é o conteúdo principal da página. A sidebar contém links de navegação à esquerda.</p>
+        <div>
+            <canvas id="myChart"></canvas>
+          </div>
+          
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          
+          <script>
+            // Passa o valor total dos pedidos do Django para o JavaScript
+            const totalPedidos = {{ total|default:0 }};
+            const totalCliente = {{cliente|default:0}};
+            const totalProdutos = {{produto|default:0}};
+          
+            const ctx = document.getElementById('myChart').getContext('2d');
+          
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['Pedidos', 'Produtos', 'Clientes'],
+                datasets: [{
+                  label: 'Quantidade',
+                  data: [totalPedidos, totalProdutos, totalCliente], // Usa totalPedidos para a barra 'Pedidos'
+                  backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                  borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+        </script>
     </div>
 
     <script>

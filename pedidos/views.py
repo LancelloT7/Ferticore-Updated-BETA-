@@ -9,6 +9,7 @@ from cliente.models import Cliente
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Sum
 
 @login_required(login_url='/autenticacao/auth')
 def cadPedidos(request):      
@@ -25,22 +26,22 @@ def cadPedidos(request):
         
     elif request.method == "POST":
         nome_cliente = request.POST.get('nome_cliente')
-        produto_ids = request.POST.getlist('produto')  # Recebe uma lista de IDs de produtos
+        produto_ids = request.POST.getlist('produto')  
         funcionario_id = request.POST.get('funcionario')
         
         cliente = Cliente.objects.get(id=nome_cliente)
         funcionario = Funcionario.objects.get(id=funcionario_id)
 
         pedido = Pedido(nome_cliente=cliente, funcionario=funcionario)
-        pedido.save()  # Salva o pedido sem produtos para obter o ID
+        pedido.save()  
 
         for produto_id in produto_ids:
             produto = Produto.objects.get(id=produto_id)
             pedido.produto.add(produto)
         
-        pedido.save()  # Salva o pedido com os produtos relacionados
+        pedido.save()  
         messages.add_message(request, constants.SUCCESS, 'Pedido cadastrado com sucesso')
-        return redirect('/pedidos/cadastrar_pedidos')  # Redireciona conforme necessário
+        return redirect('/pedidos/cadastrar_pedidos')  
 
 @login_required(login_url='/autenticacao/auth')
 def listar_pedidos(request):
@@ -58,3 +59,6 @@ def finalizar_pedido(request, pedido_id):
     
     # Redireciona para a lista de pedidos
     return redirect('listar_pedidos')
+
+
+
