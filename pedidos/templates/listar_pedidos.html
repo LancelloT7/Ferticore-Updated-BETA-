@@ -1,5 +1,6 @@
 
 <!DOCTYPE html>
+{% load static %}
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -134,6 +135,9 @@
     <div class="sidebar" id="sidebar">
         {% if user.is_authenticated %}
             <h2>Olá, {{ user.username }}</h2>
+            <a href="{% url 'opcoes' %}">
+            <img src="{% static 'img/Ferti.png' %}" style="width: 210px; height: 100px;">
+            </a>
         {% endif %}
         
         <h2>Menu</h2>

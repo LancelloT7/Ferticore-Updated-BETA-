@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar Exemplo</title>
+    <title>Ferticore</title>
     <style>
         /* Fundo reciclado e estilo base */
         body {
@@ -133,6 +134,9 @@
     <div class="sidebar" id="sidebar">
         {% if user.is_authenticated %}
             <h2>Olá, {{ user.username }}</h2>
+            <a href="{% url 'opcoes' %}">
+              <img src="{% static 'img/Ferti.png' %}" style="width: 210px; height: 100px;">
+            </a>
         {% endif %}
         
         <h2>Menu</h2>
