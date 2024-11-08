@@ -12,10 +12,16 @@ def cadastro(request):
         login = request.POST.get('login')
         senha = request.POST.get('senha')
         
+
+        if User.objects.filter(username=login):
+            messages.add_message(request, constants.ERROR, 'Usuário já cadastrado')
+            return render (request, 'cadastro.html')
+        
         # Cria e salva um novo usuário com a senha criptografada
-        User.objects.create_user(username=login, password=senha)
-        messages.add_message(request, constants.SUCCESS, 'Usuário cadastrado com sucesso')
-        return render (request, 'login.html')
+        else:
+            User.objects.create_user(username=login, password=senha)
+            messages.add_message(request, constants.SUCCESS, 'Usuário cadastrado com sucesso')
+            return render (request, 'login.html')
         
     elif request.method == "GET":
         return render (request, 'cadastro.html')

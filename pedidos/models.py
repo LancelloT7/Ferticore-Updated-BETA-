@@ -11,7 +11,8 @@ class Pedido(models.Model):
     ]
 
     data_pedido = models.DateTimeField(auto_now_add=True)  # Data do pedido
-    funcionario = models.ForeignKey(Funcionario, on_delete=models.DO_NOTHING)  # Relaciona o pedido ao funcionário
+    funcionario = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)
+  # Relaciona o pedido ao funcionário
     cod = models.AutoField(primary_key=True)  # Código do pedido
     produto = models.ManyToManyField(Produto)  # Relaciona o Produto com o Pedido
     nome_cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING)  # Relaciona o pedido ao cliente
