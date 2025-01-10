@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% block title %}Dashboard - Ferticore{% endblock %}
@@ -6,128 +5,225 @@
 {% block content %}
     <!-- Conteúdo principal -->
     <div class="content" id="content">
-        <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Lista de Pedidos</title>
+        <h1>Lista de Pedidos</h1>
+
+        <!-- Formulário de pesquisa com largura reduzida -->
+        <form method="GET" action="{% url 'listar_pedidos' %}" class="search-form">
+            <div class="form-group">
+                <label for="produto">Produto:</label>
+                <select id="produto" name="produto" class="form-control filter-control">
+                    <option value="">Todos</option>
+                    {% for produto in produtos %}
+                        <option value="{{ produto.id }}" {% if request.GET.produto == produto.id|stringformat:'s' %}selected{% endif %}>
+                            {{ produto.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cliente">Cliente:</label>
+                <select id="cliente" name="cliente" class="form-control filter-control">
+                    <option value="">Todos</option>
+                    {% for cliente in clientes %}
+                        <option value="{{ cliente.id }}" {% if request.GET.cliente == cliente.id|stringformat:'s' %}selected{% endif %}>
+                            {{ cliente.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="funcionario">Funcionário:</label>
+                <select id="funcionario" name="funcionario" class="form-control filter-control">
+                    <option value="">Todos</option>
+                    {% for funcionario in funcionarios %}
+                        <option value="{{ funcionario.id }}" {% if request.GET.funcionario == funcionario.id|stringformat:'s' %}selected{% endif %}>
+                            {{ funcionario.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </form>
+
+        <!-- Tabela de Pedidos -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome do Cliente</th>
+                        <th>Funcionário</th>
+                        <th>Data do Pedido</th>
+                        <th>Status</th>
+                        <th>Produtos</th>
+                        <th>Valor Total</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                    <tr>
+                        <td>{{ pedido.cod }}</td>
+                        <td>{{ pedido.nome_cliente }}</td>
+                        <td>{{ pedido.funcionario }}</td>
+                        <td>{{ pedido.data_pedido|date:"d/m/Y H:i" }}</td>
+                        <td>{{ pedido.status }}</td>
+                        <td>
+                            <ul class="produtos">
+                                {% for item in pedido.produtos_no_pedido %}
+                                    <li>
+                                        <div class="produto-item">
+                                            <strong>Produto:</strong> {{ item.produto.nome }} <br>
+                                            <strong>Toneladas:</strong> {{ item.quantidade }} <br>
+                                            <strong>Preço:</strong> R$ {{ item.produto.preco|floatformat:2 }} <br>
+                                            <strong>Total:</strong> R$ {{ item.total|floatformat:2 }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <strong>Total do Pedido: R$ {{ pedido.total_pedido|floatformat:2 }}</strong>
+                        </td>
+                        <td>
+                            <a href="{% url 'detalhes_pedido' pedido.cod %}" class="btn-detalle">Ver Detalhes</a>
+                            {% if pedido.status == 'Pendente' %}
+                                <form action="{% url 'finalizar_pedido' pedido.cod %}" method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-finalizar">Pendente</button>
+                                </form>
+                            {% else %}
+                                <span class="status-finalizado">Finalizado</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8">Nenhum pedido encontrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <style>
-        /* Fundo de papel reciclado */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f5f1e1; /* Cor de fundo de papel reciclado */
-            color: #333;
+        /* Formulário de Pesquisa */
+        .search-form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
         }
 
-        h1 {
-            font-size: 24px;
-            color: #2E7D32; /* Verde escuro */
+        .form-group {
+            margin-right: 15px;
             margin-bottom: 10px;
         }
 
-        /* Estilos da tabela */
+        .filter-control {
+            width: 180px;
+        }
+
+        .btn-primary {
+            background-color: #2E7D32;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* Tabela */
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            background-color: #ffffff; /* Fundo branco para contraste */
         }
 
         th, td {
-            border: 1px solid #dddddd;
+            padding: 12px;
             text-align: left;
-            padding: 10px;
+            border: 1px solid #ddd;
         }
 
         th {
-            background-color: #e0e0e0; /* Cabeçalho em cinza claro */
-            color: #333;
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
 
         tr:hover {
-            background-color: #f9f9f9; /* Efeito de hover mais suave */
+            background-color: #e8e8e8;
         }
 
-        /* Botão de finalizar pedido */
-        .btn-finalizar {
-            background-color: #2E7D32; /* Verde escuro */
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            text-align: center;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-finalizar:hover {
-            background-color: #1B5E20; /* Tom mais escuro no hover */
-        }
-
-        /* Estilos para a lista de produtos */
         .produtos {
-            margin: 0; /* Remover margem */
-            padding: 0; /* Remover preenchimento */
-            list-style-type: none; /* Remover marcadores de lista */
+            padding: 0;
+            margin: 0;
+            list-style: none;
         }
 
         .produtos li {
-            padding: 4px 0; /* Espaçamento entre os itens da lista */
+            margin-bottom: 10px;
+        }
+
+        .produto-item {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .produto-item strong {
+            color: #2E7D32;
+        }
+
+        .btn-detalle {
+            background-color: #1976D2;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .btn-detalle:hover {
+            background-color: #1565C0;
+        }
+
+        .btn-finalizar {
+            background-color: #2E7D32;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-finalizar:hover {
+            background-color: #1B5E20;
+        }
+
+        .status-finalizado {
+            color: #388E3C;
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: #E8F5E9;
+            text-align: center;
         }
     </style>
-</head>
-<body>
-    
-    <h1>Lista de Pedidos</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Nome do Cliente</th>
-                <th>Funcionário</th>
-                <th>Data do Pedido</th>
-                <th>Status</th>
-                <th>Produtos</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for pedido in pedidos %}
-            <tr>
-                <td>{{ pedido.cod }}</td>
-                <td>{{ pedido.nome_cliente }}</td>
-                <td>{{ pedido.funcionario }}</td>
-                <td>{{ pedido.data_pedido }}</td>
-                <td>{{ pedido.status }}</td>
-                <td>
-                    <ul class="produtos">
-                        {% for produto in pedido.produto.all %}
-                            <li>{{ produto.nome }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>
-                    {% if pedido.status == 'Pendente' %}
-                        <form action="{% url 'finalizar_pedido' pedido.cod %}" method="POST" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn-finalizar">Finalizar</button>
-                        </form>
-                    {% endif %}
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="7">Nenhum pedido encontrado.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
-    </div>
 {% endblock %}

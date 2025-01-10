@@ -13,6 +13,7 @@ def cadProduto(request):
     elif request.method == "POST":
         nome = request.POST.get('nome')
         formula = request.POST.get('formula')
+        preco = request.POST.get('preco')
 
         if not nome or not formula:  # Verifica se nome ou quantidade estão vazios
             messages.add_message(request, constants.ERROR, 'Nome e formula são obrigatórios.')
@@ -21,7 +22,7 @@ def cadProduto(request):
             if Produto.objects.filter(nome=nome):
                 messages.add_message(request, constants.ERROR, 'Produto já cadastrado')
             else:    
-                produto = Produto(nome=nome, formula=formula)  # Cria o objeto Produto
+                produto = Produto(nome=nome, formula=formula, preco=preco)  # Cria o objeto Produto
                 produto.save()  # Salva o produto no banco de dados
                 messages.add_message(request, constants.SUCCESS, 'Produto cadastrado com sucesso')  # Mensagem de sucesso
                 return render(request, 'cadProduto.html') # Retorna uma resposta

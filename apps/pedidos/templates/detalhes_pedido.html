@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Pedido - Ferticore{% endblock %}
+
+{% block content %}
+    <div class="content" id="content">
+        <h1>Detalhes do Pedido #{{ pedido.cod }}</h1>
+
+        <table>
+            <tr>
+                <th>Código do Pedido:</th>
+                <td>{{ pedido.cod }}</td>
+            </tr>
+            <tr>
+                <th>Nome do Cliente:</th>
+                <td>{{ pedido.nome_cliente }}</td>
+            </tr>
+            <tr>
+                <th>Funcionário:</th>
+                <td>{{ pedido.funcionario }}</td>
+            </tr>
+            <tr>
+                <th>Data do Pedido:</th>
+                <td>{{ pedido.data_pedido|date:"d/m/Y H:i" }}</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>{{ pedido.status }}</td>
+            </tr>
+            <tr>
+                <th>Total do Pedido:</th>
+                <td><strong>R$ {{ pedido.total_pedido|floatformat:2 }}</strong></td>
+            </tr>
+        </table>
+
+        <h2>Produtos</h2>
+        <ul class="produtos">
+            {% for produto_id, quantidade in pedido.produtos.items %}
+                {% with produto=produto_id|product %}
+                    <li>
+                        <div class="produto-item">
+                            <strong>Produto:</strong> {{ produto.nome }} <br>
+                            <strong>Toneladas:</strong> {{ quantidade }} <br>
+                            <strong>Preço:</strong> R$ {{ produto.preco|floatformat:2 }} <br>
+                            <strong>Total:</strong> R$ {{ produto.preco|floatformat:2|multiply:quantidade }}
+                        </div>
+                    </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'listar_pedidos' %}" class="btn-voltar">Voltar para Lista de Pedidos</a>
+    </div>
+
+    <style>
+        .produto-item {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .produto-item strong {
+            color: #2E7D32;
+        }
+
+        .btn-voltar {
+            background-color: #1976D2;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .btn-voltar:hover {
+            background-color: #1565C0;
+        }
+    </style>
+{% endblock %}
