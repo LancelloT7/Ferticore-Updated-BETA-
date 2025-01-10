@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Ferticore{% endblock %}
+
+{% block content %}
+    <!-- Conteúdo principal -->
+    <div class="content" id="content">
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+            // Passa o valor total dos pedidos do Django para o JavaScript
+            const totalPedidos = {{ total|default:0 }};
+            const totalCliente = {{ cliente|default:0 }};
+            const totalProdutos = {{ produto|default:0 }};
+        
+            const ctx = document.getElementById('myChart').getContext('2d');
+        
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pedidos', 'Produtos', 'Clientes'],
+                    datasets: [{
+                        label: 'Quantidade',
+                        data: [totalPedidos, totalProdutos, totalCliente], // Usa totalPedidos para a barra 'Pedidos'
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',  // Azul-turquesa mais opaco
+                            'rgba(153, 102, 255, 0.7)', // Roxo mais opaco
+                            'rgba(255, 159, 64, 0.7)'   // Laranja mais opaco
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)', 
+                            'rgba(153, 102, 255, 1)', 
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#f4f1e0' // Cor dos valores do eixo Y para combinar com o fundo escuro
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#f4f1e0' // Cor dos valores do eixo X para combinar com o fundo escuro
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#f4f1e0' // Cor da legenda para o fundo escuro
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+{% endblock %}

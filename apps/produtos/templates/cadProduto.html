@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Ferticore{% endblock %}
+
+{% block content %}
+<div class="content" id="content">
+    {% if messages %}
+{% for message in messages %}
+    <div class="alert {{ message.tags }}" role="alert">
+        {{ message }}
+    </div>            
+{% endfor %}
+{% endif %}
+
+<form method="POST" action="{% url 'cadProduto' %}">
+{% csrf_token %}
+
+<label for="nome">Nome:</label>
+<input type="text" id="nome" name="nome" required>
+
+<label for="quantidade">Formula:</label>
+<input type="text" id="formula" name="formula" required>
+
+<button type="submit">Cadastrar Produto</button>
+</form>
+</div>
+
+{% endblock %}
+
+
+

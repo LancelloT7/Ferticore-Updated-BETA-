@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Ferticore{% endblock %}
+
+{% block content %}
+    <!-- Conteúdo principal -->
+    <div class="content" id="content">
+        <!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Pedidos</title>
+    <link rel="stylesheet" href="{% static 'css/pedidos.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Cadastrar Pedidos</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="nome_cliente">Cliente:</label>
+        <select name="nome_cliente" id="nome_cliente">
+            {% for cliente in clientes %}
+            <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="produto">Produtos:</label>
+        <select id="produto">
+            {% for produto in produtos %}
+            <option value="{{ produto.id }}">{{ produto.nome }}</option>
+            {% endfor %}
+        </select>
+        
+        <button type="button" id="adicionar-produto">Adicionar Produto</button>
+
+        <label for="funcionario">Funcionário:</label>
+        <select name="funcionario" id="funcionario">
+            {% for funcionario in funcionarios %}
+            <option value="{{ funcionario.id }}">{{ funcionario.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Cadastrar Pedido</button>
+        
+        <!-- Produtos selecionados serão adicionados aqui -->
+        <div class="produto-card" id="produto-card">
+            <h2>Produtos Selecionados:</h2>
+            <div id="produtos-selecionados"></div>
+        </div>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{message.tags}}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<script>
+    document.getElementById('adicionar-produto').addEventListener('click', function() {
+        var produtoSelect = document.getElementById('produto');
+        var produtoId = produtoSelect.value;
+        var produtoNome = produtoSelect.options[produtoSelect.selectedIndex].text;
+
+        if (produtoId) {
+            var produtosSelecionadosDiv = document.getElementById('produtos-selecionados');
+
+            // Verifica se o produto já foi adicionado
+            if (!document.querySelector(`input[value="${produtoId}"]`)) {
+                // Cria o item visual do produto
+                var novoItem = document.createElement('div');
+                novoItem.className = 'produto-item';
+                novoItem.textContent = produtoNome;
+                
+                // Cria o botão de remoção
+                var removerBtn = document.createElement('button');
+                removerBtn.type = 'button';
+                removerBtn.textContent = 'Remover';
+                removerBtn.onclick = function() {
+                    produtosSelecionadosDiv.removeChild(novoItem);  // Remove o item do cartão
+                    produtosSelecionadosDiv.removeChild(inputHidden);  // Remove o campo oculto correspondente
+                };
+
+                novoItem.appendChild(removerBtn);
+                produtosSelecionadosDiv.appendChild(novoItem);
+
+                // Cria um campo hidden para enviar o produto selecionado no formulário
+                var inputHidden = document.createElement('input');
+                inputHidden.type = 'hidden';
+                inputHidden.name = 'produto';  // Nome da lista de produtos que será enviada
+                inputHidden.value = produtoId;
+                produtosSelecionadosDiv.appendChild(inputHidden);
+            } else {
+                alert("Este produto já foi adicionado.");
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
+    </div>
+{% endblock %}
+
+
+    
+
+    
+
+
