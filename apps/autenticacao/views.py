@@ -21,7 +21,7 @@ def cadastro(request):
         else:
             User.objects.create_user(username=login, password=senha)
             messages.add_message(request, constants.SUCCESS, 'Usuário cadastrado com sucesso')
-            return render (request, 'login.html')
+            return render (request, 'cadastro.html')
         
     elif request.method == "GET":
         return render (request, 'cadastro.html')

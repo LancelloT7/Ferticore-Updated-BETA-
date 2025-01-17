@@ -1,86 +1,134 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-
 /* Configurações do body com imagem de fundo */
-body {
-    background: url('/static/img/ferti.jpg') no-repeat center center fixed;
-    background-size: cover; /* Cobre toda a tela */
-    min-height: 100vh; /* Altura mínima para garantir que o fundo cubra toda a tela */
-    display: flex; /* Centraliza o conteúdo */
-    align-items: center; /* Alinha verticalmente */
-    justify-content: center; /* Alinha horizontalmente */
-    position: relative;
-    padding: 20px; /* Adiciona espaçamento para evitar cortes em telas menores */
-}
-
-/* Estilo do contêiner principal */
-.container {
-    background: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
-    padding: 20px 40px; /* Espaçamento interno */
-    border-radius: 10px; /* Bordas arredondadas */
-    max-width: 500px; /* Largura máxima do contêiner */
-    width: 100%; /* Largura total do contêiner */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil ao redor */
-    z-index: 2; /* Garante que o conteúdo fique acima da imagem de fundo */
-    position: relative;
-}
-
-/* Título do formulário */
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333; /* Cor do texto */
-    font-size: 24px;
-    font-weight: 600;
-}
-
-/* Estilos dos inputs no formulário */
-input {
-    width: 100%; /* Ocupa toda a largura do espaço disponível */
-    padding: 10px; /* Espaçamento interno */
-    border: 1px solid #ccc; /* Bordas cinza claro */
-    border-radius: 5px; /* Bordas arredondadas */
-    font-size: 16px; /* Tamanho da fonte */
-    margin-top: 10px; /* Espaçamento superior */
-}
-
-/* Espaçamento entre colunas */
-.row .col {
-    margin-bottom: 15px;
-}
-
-/* Estilo para ícones dentro do input (se aplicável) */
-.input-container img {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* Estilos de responsividade para telas menores */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px 20px;
+    
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
     }
-
-    h2 {
-        font-size: 20px;
+    
+        header{
+            width: 100%;
+            height: auto;
+        }
+        
+        header img{
+            width: 300px;
+            height: auto;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+            
+        
+        body{
+            background: url('/static/img/ferti.jpg') no-repeat center center fixed;
+            background-size:cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .container{
+            width: 420px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .2);
+            backdrop-filter: blur(20px);
+            border-radius: 10px;
+            padding: 30px 40px;
+            position: absolute;
+        }
+    
+        h1{
+            font-size: 36px;
+            text-align: center;
+            color: #fff;
+        }
+    
+        .input-container{
+            position: relative;
+            width: 100%;
+            height: 50px;
+            margin: 30px 0;
+        }
+    
+        .input-container input{
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: 2px solid rgba(255, 255, 255, .2);
+            border-radius:  10px;
+            font-size: 16px;
+            color:#fff;
+            padding: 20px 45px 20px 20px;
+    
+        }
+    
+    .input-container input::placeholder{
+        color: #fff;
     }
-
-    input {
-        font-size: 14px;
-        padding: 8px;
+    
+    .input-container img{
+        position: absolute;
+        right: 24px;
+        top:20%;
+        margin-top: 5px;
     }
-}
-
-/* Garantir que a imagem de fundo fique visível em todas as telas */
-@media (max-width: 576px) {
-    body {
-        background-size: contain; /* Faz a imagem de fundo se ajustar melhor em telas pequenas */
+    
+    .input-container img:hover{
+        color: #fff;
     }
-}
+    
+    .input-container a{
+        font-size: 16px;
+        margin-top: 5px;
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    .input-container a:hover{
+        text-decoration: underline;
+    
+    }
+    
+    .submit-button{
+        width: 100%;
+        height: 50px;
+        background-color: #089b21;
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 500;
+        margin-top: 24px;
+        cursor: pointer;
+        outline: none;
+        font-size: 16px; 
+    }
+    
+    .submit-button:hover{
+        background-color: #6bf883;
+    }
+    .register-link{
+     text-align: center;
+     margin: 20px 0;
+    }
+    
+    .register-link p{
+        font-size: 16px;
+        color: #fff;
+        font-weight: 500 ;
+    }
+    
+    .register-link p a{
+        font-size: 16px;
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+    }
+    
+    .register-link p a:hover{
+        text-decoration: underline;
+    }

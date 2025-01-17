@@ -7,7 +7,8 @@ class Cliente(models.Model):
         ('Revenda', 'Revenda'),
         ('Produtor', 'Produtor'),
         ('Usina', 'Usina'),
-        ('Cooperativa', 'cooperativa'),
+        ('Cooperativa', 'Cooperativa'),
+        ('Granuladora', 'Granuladora'),
     ]
 
     nome = models.CharField(max_length=100)  # Nome do cliente

@@ -3,6 +3,10 @@
 {% block title %}Dashboard - Ferticore{% endblock %}
 
 {% block content %}
+{% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static 'css/listar_pedidos.css'%}">
+    </head>
     <!-- Conteúdo principal -->
     <div class="content" id="content">
         <h1>Lista de Pedidos</h1>
@@ -110,120 +114,5 @@
         </div>
     </div>
 
-    <style>
-        /* Formulário de Pesquisa */
-        .search-form {
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-        }
-
-        .form-group {
-            margin-right: 15px;
-            margin-bottom: 10px;
-        }
-
-        .filter-control {
-            width: 180px;
-        }
-
-        .btn-primary {
-            background-color: #2E7D32;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-        }
-
-        /* Tabela */
-        .table-container {
-            margin-top: 20px;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #e8e8e8;
-        }
-
-        .produtos {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-
-        .produtos li {
-            margin-bottom: 10px;
-        }
-
-        .produto-item {
-            margin-bottom: 10px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-
-        .produto-item strong {
-            color: #2E7D32;
-        }
-
-        .btn-detalle {
-            background-color: #1976D2;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        .btn-detalle:hover {
-            background-color: #1565C0;
-        }
-
-        .btn-finalizar {
-            background-color: #2E7D32;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .btn-finalizar:hover {
-            background-color: #1B5E20;
-        }
-
-        .status-finalizado {
-            color: #388E3C;
-            font-weight: bold;
-            padding: 8px;
-            border-radius: 4px;
-            background-color: #E8F5E9;
-            text-align: center;
-        }
-    </style>
+    
 {% endblock %}

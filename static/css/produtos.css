@@ -1,9 +1,37 @@
-<style>
+
     /* Estilos básicos para o layout dos produtos */
     body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
         margin: 0;
+        padding: 0; /* Removido o padding para evitar conflito com a sidebar */
+    }
+
+    .sidebar {
+        width: 250px; /* Largura da sidebar */
+        height: 100vh;
+        background-color: #333;
+        color: #fff;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .sidebar a:hover {
+        text-decoration: underline;
+    }
+
+    .main-content {
+        margin-left: 250px; /* Espaço para a sidebar */
         padding: 20px;
     }
 
@@ -12,7 +40,7 @@
         margin: auto;
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;  /* Espaçamento entre os cards */
+        gap: 20px; /* Espaçamento entre os cards */
     }
 
     .produto-card {
@@ -21,13 +49,13 @@
         border-radius: 8px;
         padding: 15px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        flex: 1 1 calc(25% - 20px);  /* Quatro colunas */
-        min-width: 220px;  /* Largura mínima */
+        flex: 1 1 calc(25% - 20px); /* Quatro colunas */
+        min-width: 220px; /* Largura mínima */
         transition: transform 0.2s;
     }
 
     .produto-card:hover {
-        transform: scale(1.05);  /* Efeito ao passar o mouse */
+        transform: scale(1.05); /* Efeito ao passar o mouse */
     }
 
     .produto-nome {
@@ -47,4 +75,3 @@
         color: #333;
         margin: 0;
     }
-</style>

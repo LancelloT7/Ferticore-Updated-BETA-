@@ -1,18 +1,18 @@
-// base.js
-
 function toggleSidebar() {
-    var sidebar = document.getElementById('sidebar');
-    var content = document.getElementById('content');
-    var toggleBtn = document.querySelector('.toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const toggleButton = document.querySelector('.toggle-btn');
 
-    // Alternar a classe 'hidden' na sidebar e 'shifted' no conteúdo
+    // Adicionar ou remover a classe 'hidden' da sidebar
     sidebar.classList.toggle('hidden');
+
+    // Adicionar ou remover a classe 'shifted' do conteúdo
     content.classList.toggle('shifted');
 
-    // Ajustar a posição do botão conforme a visibilidade da sidebar
+    // Ajustar a posição do botão
     if (sidebar.classList.contains('hidden')) {
-        toggleBtn.style.left = '10px'; // Colocar o botão à esquerda quando a sidebar estiver escondida
+        toggleButton.style.left = '10px'; // Ajusta o botão para a posição inicial
     } else {
-        toggleBtn.style.left = '260px'; // Colocar o botão ao lado da sidebar quando estiver visível
+        toggleButton.style.left = '260px'; // Ajusta o botão para a posição da sidebar visível
     }
 }
