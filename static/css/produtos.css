@@ -1,0 +1,102 @@
+
+    /* Estilos básicos para o layout dos produtos */
+    /* Formulário de pesquisa */
+.form-pesquisa {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-pesquisa input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.form-pesquisa input[type="text"]:focus {
+    border-color: #2E7D32;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.form-pesquisa button {
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #2E7D32;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-pesquisa button:hover {
+    background-color: #1B5E20;
+}
+
+/* Mensagem para nenhum produto encontrado */
+.mensagem-nenhum-produto {
+    text-align: center;
+    color: #999;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0; /* Removido o padding para evitar conflito com a sidebar */
+    }
+
+    
+
+    .main-content {
+        margin-left: 250px; /* Espaço para a sidebar */
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Espaçamento entre os cards */
+    }
+
+    .produto-card {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 10px;
+        text-align: center;
+    }
+    
+    .produto-imagem {
+        max-width: 10%;
+        height: auto;
+    }
+
+    .produto-card:hover {
+        transform: scale(1.05); /* Efeito ao passar o mouse */
+    }
+
+    .produto-nome {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0 0 10px;
+    }
+
+    .produto-descricao {
+        font-size: 14px;
+        color: #666;
+        margin: 0 0 10px;
+    }
+
+    .produto-preco {
+        font-size: 16px;
+        color: #333;
+        margin: 0;
+    }

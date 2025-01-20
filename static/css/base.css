@@ -1,0 +1,104 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #033007;
+    padding-top: 20px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    padding-left: 10px; /* Alinha os itens à esquerda */
+}
+
+.sidebar.hidden {
+    width: 0;  /* Quando a sidebar está oculta, a largura deve ser 0 */
+    visibility: hidden;  /* A visibilidade também é escondida */
+    overflow: hidden; /* Evita que o conteúdo da sidebar transborde */
+}
+
+/* Botão de alternância */
+.toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 260px; /* Espaço para alinhar ao lado da sidebar */
+    background-color: #000000;
+    color: #f4f1e0;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.toggle-btn:hover {
+    background-color: #34495e;
+}
+
+/* Botões dentro da sidebar */
+.sidebar a {
+    display: block;
+    color: #f4f1e0;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #34495e;
+}
+
+/* Conteúdo */
+.content {
+    position: relative;
+    margin-left: 250px; /* Espaço reservado para a sidebar */
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+    background-color: #f8fafc;
+    
+    
+}
+
+
+
+/* Quando a sidebar estiver oculta, o conteúdo se ajusta */
+.content.shifted {
+    margin-left: 0; /* O conteúdo ocupa todo o espaço disponível */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .toggle-btn {
+        left: 210px;
+    }
+
+    .content {
+        margin-left: 200px;
+    }
+
+    .sidebar.hidden {
+        width: 0;
+        visibility: hidden;
+    }
+
+    .content.shifted {
+        margin-left: 0;
+    }
+}

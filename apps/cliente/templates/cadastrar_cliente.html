@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Ferticore{% endblock %}
+
+{% block content %}
+{% load static %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cliente.css' %}">
+    <title>Cadastrar Cliente</title>
+</head>
+<body>
+    <div class="content" id="content">
+        <h1>Cadastrar Cliente</h1>
+
+        <!-- Exibição de mensagens -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Formulário -->
+        <form method="POST" action="{% url 'cadastrar_cliente' %}" class="form-cliente">
+            {% csrf_token %}
+            
+            <!-- Nome -->
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Nome do cliente" required>
+            </div>
+            
+            <!-- CNPJ -->
+            <div class="form-group">
+                <label for="cnpj">CNPJ:</label>
+                <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ do cliente" required>
+            </div>
+            
+            <!-- Tipo de Cliente -->
+            <div class="form-group">
+                <label for="tipo_cliente">Tipo de Cliente:</label>
+                <select name="tipo_cliente" id="tipo_cliente" required>
+                    <option value="" disabled selected>Selecione um tipo</option>
+                    <option value="Revenda">Revenda</option>
+                    <option value="Produtor">Produtor</option>
+                    <option value="Usina">Usina</option>
+                    <option value="Cooperativa">Cooperativa</option>
+                    <option value="Granuladora">Granuladora</option>
+                </select>
+            </div>
+            
+            <!-- Botão de Cadastro -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+
+{% endblock %}

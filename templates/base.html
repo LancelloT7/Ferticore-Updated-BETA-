@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ferticore{% endblock %}</title>
+
+    <!-- Importação do CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <!-- Você pode adicionar outras tags <head> aqui, como links de fontes ou ícones -->
+</head>
+<body>
+
+    <div class="sidebar" id="sidebar">
+        {% if user.is_authenticated %}
+            <h2>Olá, {{ user.username }}</h2>
+            <a href="{% url 'opcoes' %}">
+              <img src="{% static 'img/Ferti.png' %}" style="width: 150px; height: 100px;">
+            </a>
+        {% endif %}
+        <a href="#home">Produção</a>
+        <a href="#services">Dashboard</a>
+        <a href="{% url 'cadPedidos' %}">Fazer Pedidos</a>
+        <a href="{% url 'cadProduto' %}">Cadastro de produtos</a>
+        <a href="{% url 'listar_pedidos' %}">Ver Pedidos</a>
+        <a href="{% url 'listar_produtos' %}">Ver Produtos</a>
+        <a href="{% url 'cadastrar_cliente' %}">Cadastrar Clientes</a>
+        <a href="{% url 'cadastrar_funcionario' %}">Cadastrar Funcionário</a>
+        <a href="{% url 'sair' %}">Sair</a>
+    </div>
+
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+    <div class="content" id="content">
+        {% block content %}
+        <!-- Conteúdo específico da página vai aqui -->
+        {% endblock %}
+    </div>
+
+    <!-- Importação do JavaScript -->
+    <script src="{% static 'js/base.js' %}"></script>
+
+    <!-- Aqui você pode adicionar outros scripts, como o Chart.js se necessário -->
+</body>
+</html>

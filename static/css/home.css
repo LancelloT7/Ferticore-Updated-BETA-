@@ -1,0 +1,96 @@
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #1e2d24; /* Cor mais escura para o fundo da sidebar */
+    padding-top: 20px;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.sidebar a {
+    display: block;
+    color: #f4f1e0; /* Texto claro para contraste */
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #2c3e50; /* Cor de hover mais suave */
+}
+
+.sidebar img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Botão de alternância */
+.toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 260px; /* Alinhamento ao lado da sidebar */
+    background-color: #34495e; /* Cor mais clara para o botão */
+    color: #f4f1e0;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.toggle-btn:hover {
+    background-color: #2c3e50; /* Cor de hover do botão */
+}
+
+/* Conteúdo */
+.content {
+    margin-left: 250px; /* Espaço reservado para a sidebar */
+    padding: 20px;
+    background-color: #121212; /* Fundo escuro para o conteúdo */
+    min-height: 100vh; /* Garante que o conteúdo preencha a altura total da tela */
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content.shifted {
+    margin-left: 0; /* Reposiciona o conteúdo quando a sidebar está escondida */
+}
+
+/* Canvas do Gráfico */
+.content canvas {
+    display: block;
+    margin: 20px auto;
+    max-width: 800px; /* Limita o tamanho máximo do gráfico */
+    width: 100%; /* Ajusta o gráfico ao tamanho do contêiner */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px; /* Reduz a largura da sidebar em telas pequenas */
+    }
+
+    .toggle-btn {
+        left: 210px; /* Ajusta a posição do botão de alternância */
+    }
+
+    .content {
+        margin-left: 200px; /* Reduz o espaço quando a sidebar for pequena */
+    }
+
+    .sidebar.hidden {
+        width: 0;
+        visibility: hidden;
+    }
+
+    .content.shifted {
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/FertPadrao-removebg-preview.png' %}">
+    </header>
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        {% endif %}
+        <form  method="post" action="{% url 'auth' %}">
+            {% csrf_token %}
+            <h1>Entrar na plataforma</h1>
+            <div class="input-container">
+                <input placeholder="Login" type="text" name="login" required>
+                <img width="25" height="25" src="https://img.icons8.com/windows/32/gender-neutral-user.png" alt="gender-neutral-user"/>
+            </div>
+
+            <div class="input-container">
+                <input placeholder="Senha" type="password" name="senha" required>
+                <img width="24" height="24" src="https://img.icons8.com/ios/50/lock--v1.png" alt="lock--v1"/>
+                <a href="#">Esqueci minha senha</a>
+            </div>
+
+            <button type="submit" class="submit-button">Entrar</button>
+
+            <div class="register-link">
+                <p>Não está cadastrado? <a href="{% url 'cadastro' %}">Cadastrar</a></p>
+            </div>
+    </div>
+    
+</body>
+</html>
