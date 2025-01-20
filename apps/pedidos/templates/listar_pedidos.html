@@ -49,6 +49,7 @@
                 </select>
             </div>
 
+<<<<<<< HEAD
             <div class="form-group">
                 <label for="status">Status:</label>
                 <select id="status" name="status" class="form-control filter-control">
@@ -59,6 +60,8 @@
                 </select>
             </div>
 
+=======
+>>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
             <button type="submit" class="btn btn-primary">Pesquisar</button>
         </form>
 
@@ -103,6 +106,10 @@
                             <strong>Total do Pedido: R$ {{ pedido.total_pedido|floatformat:2 }}</strong>
                         </td>
                         <td>
+<<<<<<< HEAD
+=======
+                            <a href="{% url 'detalhes_pedido' pedido.cod %}" class="btn-detalle">Ver Detalhes</a>
+>>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
                             {% if pedido.status == 'Pendente' %}
                                 <form action="{% url 'finalizar_pedido' pedido.cod %}" method="POST" style="display:inline;">
                                     {% csrf_token %}

@@ -1,6 +1,9 @@
 from django.db import models
+<<<<<<< HEAD
 from PIL import Image
 
+=======
+>>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
 
 
 class Produto(models.Model):
