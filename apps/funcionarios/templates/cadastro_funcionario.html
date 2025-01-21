@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 
-<<<<<<< HEAD
 {% block title %}Cadastrar Funcionário{% endblock %}
 
 {% block content %}
 {% load static %}
 
-<!-- Link para o arquivo CSS -->
 <link rel="stylesheet" href="{% static 'css/funcionario.css' %}">
 
 <div class="content" id="content">
@@ -55,48 +53,9 @@
         {% endif %}
     </div>
 </div>
+
 {% endblock %}
-=======
-{% block title %}Dashboard - Ferticore{% endblock %}
 
-{% block content %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/funcionario.css' %}">
-<div class="content" id="content">
-    <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastrar Funcionário</title>
-
-</head>
-<body>
-
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert {{ message.tags }}" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-
-<form method="POST" action="{% url 'cadastrar_funcionario' %}">
-    {% csrf_token %}
-    
-    <input type="text" placeholder="Nome" name="nome" required>
-    <hr>
-    <input type="text" placeholder="Cargo" name="cargo" required>
-    <hr>
-    <div>
-        <input type="submit" value="Cadastrar" class="btn-success">
-    </div>
-</form>
-
-</body>
-</html>
-</div>
-{% endblock %}
 
 
 
@@ -104,4 +63,4 @@
 
 
 
->>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
+

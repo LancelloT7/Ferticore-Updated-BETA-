@@ -8,11 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-<<<<<<< HEAD
-set VIRTUAL_ENV=C:\Users\GABRIEL\Downloads\Ferticore-Updated-BETA--master\venv
-=======
-set VIRTUAL_ENV=C:\Users\GABRIEL\Desktop\ferticore\venv
->>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
+set VIRTUAL_ENV=C:\Users\GABRIEL\Ferticore-Updated-BETA--7\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

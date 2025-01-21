@@ -17,11 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import render
-<<<<<<< HEAD
 from django.conf import settings
 from django.conf.urls.static import static
-=======
->>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,10 +31,8 @@ urlpatterns = [
     path('funcionario/', include('funcionarios.urls')),
     path('cliente/', include('cliente.urls')),
 ]
-<<<<<<< HEAD
 
 if settings.DEBUG:  # Adicione apenas se estiver em modo DEBUG
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-=======
->>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
+

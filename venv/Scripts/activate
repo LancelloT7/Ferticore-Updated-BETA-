@@ -35,11 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-<<<<<<< HEAD
-VIRTUAL_ENV="C:\Users\GABRIEL\Downloads\Ferticore-Updated-BETA--master\venv"
-=======
-VIRTUAL_ENV="C:\Users\GABRIEL\Desktop\ferticore\venv"
->>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
+VIRTUAL_ENV="C:\Users\GABRIEL\Ferticore-Updated-BETA--7\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

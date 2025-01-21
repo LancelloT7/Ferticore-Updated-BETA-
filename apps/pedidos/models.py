@@ -17,17 +17,17 @@ class Pedido(models.Model):
     data_pedido = models.DateTimeField(auto_now_add=True)  # Data do pedido
     funcionario = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)  # Relaciona o pedido ao funcionário
     cod = models.AutoField(primary_key=True)  # Código do pedido
-<<<<<<< HEAD
+
     nome_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)  # Relaciona o pedido ao cliente
-=======
+
     nome_cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING)  # Relaciona o pedido ao cliente
->>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
+
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pendente')  # Status do pedido
 
     # Usando JSONField para armazenar produtos e quantidades
     produtos = models.JSONField(default=dict)  # Ex: {"produto_id": quantidade}
 
-<<<<<<< HEAD
+
 
     def produtos_no_pedido(self):
         """
@@ -46,8 +46,8 @@ class Pedido(models.Model):
                 continue
         return produtos_detalhados
     
-=======
->>>>>>> ecf1ab31fdaa516378b83f9c0f99b20d30448955
+
+
     def __str__(self):
         produtos_nomes = ", ".join(str(produto['nome']) for produto in self.produtos.values())  # Obtém os nomes dos produtos
         return (f"Pedido {self.cod} - "
