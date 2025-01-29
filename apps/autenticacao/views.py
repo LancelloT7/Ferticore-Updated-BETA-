@@ -11,9 +11,14 @@ def cadastro(request):
     if request.method == "POST":
         login = request.POST.get('login')
         senha = request.POST.get('senha')
+        confirmar_senha = request.POST.get('confirmar_senha')
         
+        if confirmar_senha != senha:
+            User.objects.create_user(username=login, password=senha)
+            messages.add_message(request, constants.ERROR, 'As senhas não são iguais')
+            return render (request, 'cadastro.html')
 
-        if User.objects.filter(username=login):
+        elif User.objects.filter(username=login):
             messages.add_message(request, constants.ERROR, 'Usuário já cadastrado')
             return render (request, 'cadastro.html')
         

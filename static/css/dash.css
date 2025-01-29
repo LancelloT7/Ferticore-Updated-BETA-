@@ -1,0 +1,38 @@
+/* Conteúdo */
+.content {
+    margin-left: 250px; /* Espaço reservado para a sidebar */
+    padding: 20px;
+    background-color: #000; /* Fundo preto para o conteúdo */
+    min-height: 100vh; /* Garante que o conteúdo preencha a altura total da tela */
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content.shifted {
+    margin-left: 0; /* Reposiciona o conteúdo quando a sidebar está escondida */
+}
+
+/* Canvas do Gráfico */
+.content canvas {
+    display: block;
+    margin: 20px auto;
+    max-width: 800px; /* Limita o tamanho máximo do gráfico */
+    width: 100%; /* Ajusta o gráfico ao tamanho do contêiner */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 200px; /* Reduz o espaço quando a sidebar for pequena */
+    }
+
+    .content.shifted {
+        margin-left: 0;
+    }
+}
+
+
+
+  

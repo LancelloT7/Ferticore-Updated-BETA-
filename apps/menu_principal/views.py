@@ -12,7 +12,12 @@ from produtos.models import Produto
     
 
 @login_required(login_url=('/autenticacao/auth'))
-def inicio(request): 
+def inicio(request):
+         
+        return render(request, 'inicio.html')
+    
+@login_required(login_url=('/autenticacao/auth'))
+def dashboard(request): 
     if request.method == "GET":
         # Conta o total de pedidos
         total_pedidos = Pedido.objects.count()
@@ -26,11 +31,8 @@ def inicio(request):
             'produto': total_produtos,   
             # outros dados que você possa querer passar
         }
-        
-        
 
-        return render(request, 'inicio.html', context)
-    
+        return render(request, 'dashboard.html', context)
     
 def sair(request):
     logout(request)

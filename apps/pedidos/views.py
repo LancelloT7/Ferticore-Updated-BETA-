@@ -84,6 +84,9 @@ def listar_pedidos(request):
     if funcionario_id:
         pedidos = pedidos.filter(funcionario_id=funcionario_id)
 
+   
+
+
     # Obtém as listas de produtos, clientes e funcionários para o filtro
     produtos = Produto.objects.all()
     clientes = Cliente.objects.all()

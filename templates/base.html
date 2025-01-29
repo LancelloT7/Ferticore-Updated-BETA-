@@ -21,7 +21,7 @@
             </a>
         {% endif %}
         <a href="#home">Produção</a>
-        <a href="#services">Dashboard</a>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
         <a href="{% url 'cadPedidos' %}">Fazer Pedidos</a>
         <a href="{% url 'cadProduto' %}">Cadastro de produtos</a>
         <a href="{% url 'listar_pedidos' %}">Ver Pedidos</a>

@@ -2,7 +2,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    
    
 }
 
@@ -62,7 +62,7 @@
 /* Conteúdo */
 .content {
     position: relative;
-    margin-left: 250px; /* Espaço reservado para a sidebar */
+    margin-left: 200px; /* Espaço reservado para a sidebar */
     padding: 20px;
     background-color: #f8f9fa;
     min-height: 100vh;
