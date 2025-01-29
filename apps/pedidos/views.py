@@ -63,41 +63,53 @@ from decimal import Decimal
 
 from decimal import Decimal
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from pedidos.models import Pedido
+from produtos.models import Produto
+from funcionarios.models import Funcionario
+from cliente.models import Cliente
+
 @login_required(login_url='/autenticacao/auth')
 def listar_pedidos(request):
-    # Obtém os parâmetros de filtro
+    # Obtém os parâmetros de filtro da URL
     produto_id = request.GET.get('produto', None)
     cliente_id = request.GET.get('cliente', None)
     funcionario_id = request.GET.get('funcionario', None)
+    status_pedido = request.GET.get('status', None)  # Novo filtro de status
 
     pedidos = Pedido.objects.all()
 
-    # Filtra por produto se o filtro estiver presente
+    # Filtra por produto
     if produto_id:
         pedidos = pedidos.filter(produtos__has_key=produto_id)
 
-    # Filtra por cliente se o filtro estiver presente
+    # Filtra por cliente
     if cliente_id:
         pedidos = pedidos.filter(nome_cliente_id=cliente_id)
 
-    # Filtra por funcionário se o filtro estiver presente
+    # Filtra por funcionário
     if funcionario_id:
         pedidos = pedidos.filter(funcionario_id=funcionario_id)
 
-   
+    # Filtra por status do pedido
+    if status_pedido:
+        pedidos = pedidos.filter(status=status_pedido)
 
-
-    # Obtém as listas de produtos, clientes e funcionários para o filtro
+    # Obtém as listas de produtos, clientes, funcionários e status disponíveis
     produtos = Produto.objects.all()
     clientes = Cliente.objects.all()
     funcionarios = Funcionario.objects.all()
+    status_opcoes = Pedido.STATUS_CHOICES  # Lista de status disponíveis
 
     return render(request, 'listar_pedidos.html', {
         'pedidos': pedidos,
         'produtos': produtos,
         'clientes': clientes,
-        'funcionarios': funcionarios
+        'funcionarios': funcionarios,
+        'status_opcoes': status_opcoes,
     })
+
 
 
 

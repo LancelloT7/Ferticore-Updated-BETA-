@@ -130,7 +130,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Ou qualquer outro diretório de estáticos
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'apps/cliente/templates/static'),
+    os.path.join(BASE_DIR, 'apps/funcionarios/templates/static'),
+    os.path.join(BASE_DIR, 'apps/pedidos/templates/static'),
+    os.path.join(BASE_DIR, 'apps/produtos/templates/static'),
+    os.path.join(BASE_DIR, 'apps/menu_peincipal/templates/static'),
+    os.path.join(BASE_DIR, 'apps/autenticacao/templates/static'),
 ]
 
 

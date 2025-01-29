@@ -53,7 +53,7 @@
                 <select id="status" name="status" class="form-control filter-control">
                     <option value="">Todos</option>
                     <option value="Pendente" {% if request.GET.status == 'Pendente' %}selected{% endif %}>Pendente</option>
-                    <option value="Finalizado" {% if request.GET.status == 'Finalizado' %}selected{% endif %}>Finalizado</option>
+                    <option value="Concluído" {% if request.GET.status == 'Concluído' %}selected{% endif %}>Finalizado</option>
                     <!-- Adicione outros status conforme necessário -->
                 </select>
             </div>
