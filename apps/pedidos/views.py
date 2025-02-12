@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Sum
+from decimal import Decimal
 
 @login_required(login_url='/autenticacao/auth')
 def cadPedidos(request):      
@@ -57,18 +58,6 @@ def cadPedidos(request):
         return redirect('/pedidos/cadastrar_pedidos')
 
 
-
-
-from decimal import Decimal
-
-from decimal import Decimal
-
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from pedidos.models import Pedido
-from produtos.models import Produto
-from funcionarios.models import Funcionario
-from cliente.models import Cliente
 
 @login_required(login_url='/autenticacao/auth')
 def listar_pedidos(request):
@@ -137,16 +126,17 @@ def finalizar_pedido(request, pedido_id):
 
 
 
-def detalhes_pedido(request, pedido_id):
+def detalhes_pedido(request, id):
     # Tenta buscar o pedido com o ID fornecido
-    pedido = get_object_or_404(Pedido, id=pedido_id)
+    produtos = Produto.objects.all()
+    pedido = get_object_or_404(Pedido, cod=id)
     
     # Calculando o total do pedido (isso pode ser feito diretamente no modelo, se já tiver uma função)
     total_pedido = pedido.total_pedido()
-
     # Renderize o template com os dados do pedido
     return render(request, 'detalhes_pedido.html', {
         'pedido': pedido,
-        'total_pedido': total_pedido
+        'total_pedido': total_pedido,
+        'produtos': produtos
     })
 

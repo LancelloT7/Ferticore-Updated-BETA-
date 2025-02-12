@@ -47,6 +47,10 @@ def listar_produtos(request):
     
     return render(request, 'listar_produto.html', {'produtos': produtos})
 
+def detalhes(request, id):
+     produto = Produto.objects.get(id=id)
+
+     return render(request, 'detalhes.html', { 'produto': produto})
 
     
     

@@ -79,7 +79,7 @@
                 <tbody>
                     {% for pedido in pedidos %}
                     <tr>
-                        <td>{{ pedido.cod }}</td>
+                        <td>{{ pedido.cod }}<h1><a href="{% url 'detalhes_pedido' pedido.cod %}" name="id">Detalhes</a></td>
                         <td>{{ pedido.nome_cliente }}</td>
                         <td>{{ pedido.funcionario }}</td>
                         <td>{{ pedido.data_pedido|date:"d/m/Y H:i" }}</td>
@@ -93,8 +93,10 @@
                                             <strong>Toneladas:</strong> {{ item.quantidade }} <br>
                                             <strong>Preço:</strong> R$ {{ item.produto.preco|floatformat:2 }} <br>
                                             <strong>Total:</strong> R$ {{ item.total|floatformat:2 }}
+                                            
                                         </div>
                                     </li>
+                                    
                                 {% endfor %}
                             </ul>
                         </td>

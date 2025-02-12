@@ -23,9 +23,14 @@
             {% if produtos %}
                 {% for produto in produtos %}
                     <div class="produto-card">
+                        <hr>
                         <div class="produto-nome">{{ produto.nome }}</div>
                         <div class="produto-descricao">{{ produto.formula }}</div>
                         <div class="produto-preco">R$ {{ produto.preco }}</div>
+                        <h1>
+                            <a href="{% url 'detalhes' produto.id %}" >DETALHES</a>
+                        </h1>
+                        
 
                         {% if produto.img %}
                             <!-- Garantindo que a imagem será mostrada corretamente -->

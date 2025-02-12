@@ -1,0 +1,12 @@
+
+<input type="text" value="{{produto.nome}}">
+<hr>
+<input type="text" value="{{produto.formula}}">
+<hr>
+<input type="text" value="{{produto.preco}}">
+<hr>
+<img src="{{ produto.img.url }}" width="800" height="auto">
+
+<h1>
+    <a href="{% url 'listar_produtos' %}">Voltar</a>
+</h1>
