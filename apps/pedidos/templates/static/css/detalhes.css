@@ -4,7 +4,7 @@
 }
 
 .pedido-detalhes {
-    width: 100%;
+    width: 50%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
@@ -16,7 +16,7 @@
 }
 
 .pedido-detalhes th {
-    background-color: #2E7D32;
+    background-color:rgb(0, 15, 1);
     color: white;
 }
 
@@ -44,7 +44,14 @@
 }
 
 .produto-conteudo {
-    font-size: 16px;
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    gap: 15px; /* Espaço entre a imagem e o texto */
+}
+
+.produto-imagem img {
+    display: block;
+    border-radius: 8px; /* Cantos arredondados opcional */
 }
 
 /* Estilo para o botão de voltar */

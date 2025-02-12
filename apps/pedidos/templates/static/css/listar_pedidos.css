@@ -27,12 +27,14 @@
         .table-container {
             margin-top: 20px;
             overflow-x: auto;
+            font-size: 16px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            font-size: 16px;
         }
 
         th, td {

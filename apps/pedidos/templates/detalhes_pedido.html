@@ -9,33 +9,29 @@
 
 
     <div class="content" id="content">
-        <h1>Detalhes do Pedido {{ pedido.cod }}</h1>
+        <h1>Detalhes do Pedido</h1>
 
         <div class="pedido-info">
             <table class="pedido-detalhes">
                 <tr>
-                    <th>Código do Pedido:</th>
-                    <td>{{ pedido.cod }}</td>
+                    <th>Código do Pedido: {{ pedido.cod }}</th>
                 </tr>
                 <tr>
-                    <th>Nome do Cliente:</th>
-                    <td>{{ pedido.nome_cliente }}</td>
+                    <th>Data do Pedido: {{ pedido.data_pedido|date:"d/m/Y H:i" }}</th>
                 </tr>
                 <tr>
-                    <th>Funcionário:</th>
-                    <td>{{ pedido.funcionario }}</td>
+                    <th>Nome do Cliente: {{ pedido.nome_cliente.nome }} <br>CNPJ: {{ pedido.nome_cliente.cnpj }} TIPO: {{ pedido.nome_cliente.tipo_cliente }}</th>
+                   
                 </tr>
                 <tr>
-                    <th>Data do Pedido:</th>
-                    <td>{{ pedido.data_pedido|date:"d/m/Y H:i" }}</td>
+                    <th>Funcionário: {{ pedido.funcionario.nome }} <br>Cargo: {{ pedido.funcionario.cargo }}</th>
                 </tr>
                 <tr>
-                    <th>Status:</th>
-                    <td>{{ pedido.status }}</td>
+                    <th>Status: {{ pedido.status }}</th>
                 </tr>
                 <tr>
-                    <th>Total do Pedido:</th>
-                    <td><strong>R$ {{ pedido.total_pedido|floatformat:2 }}</strong></td>
+                    <th>Total do Pedido: <strong>R$ {{ pedido.total_pedido|floatformat:2 }}</strong></th>
+                    
                 </tr>
             </table>
         </div>
@@ -43,14 +39,19 @@
         <h2>Produtos</h2>
         <ul class="produtos">
             {% for item in pedido.produtos_no_pedido %}
-                <li class="produto-item">
-                    <div class="produto-conteudo">
+            <li class="produto-item">
+                <div class="produto-conteudo">
+                    <div class="produto-imagem">
+                        <img src="{{ item.produto.img.url }}" width="150" height="auto">
+                    </div>
+                    <div class="produto-info">
                         <strong>Produto:</strong> {{ item.produto.nome }} <br>
                         <strong>Toneladas:</strong> {{ item.quantidade }} <br>
                         <strong>Preço:</strong> R$ {{ item.produto.preco|floatformat:2 }} <br>
                         <strong>Total:</strong> R$ {{ item.total|floatformat:2 }}
                     </div>
-                </li>
+                </div>
+            </li>
             {% endfor %}
         </ul>
 

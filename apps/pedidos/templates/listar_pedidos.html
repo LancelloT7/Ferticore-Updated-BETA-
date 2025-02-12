@@ -78,7 +78,7 @@
                 </thead>
                 <tbody>
                     {% for pedido in pedidos %}
-                    <tr>
+                    <br>
                         <td>{{ pedido.cod }}<h1><a href="{% url 'detalhes_pedido' pedido.cod %}" name="id">Detalhes</a></td>
                         <td>{{ pedido.nome_cliente }}</td>
                         <td>{{ pedido.funcionario }}</td>
